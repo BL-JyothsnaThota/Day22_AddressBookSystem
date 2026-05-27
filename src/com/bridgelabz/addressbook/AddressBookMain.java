@@ -13,5 +13,9 @@ public class AddressBookMain {
 
         AddressBook officeBook = new AddressBook();
         addressBookMap.put("Office", officeBook);
+        addressBookMap.values().stream()
+                .flatMap(book -> book.personList.stream())
+                .filter(p -> p.city.equals("Chennai"))
+                .forEach(ContactPerson::display);
     }
 }
