@@ -30,4 +30,10 @@ public class ContactPerson {
                 + city + ", " + state + ", " + zip + ", "
                 + phoneNumber + ", " + email);
     }
+    @Override
+    public boolean equals(Object obj) {
+        ContactPerson p = (ContactPerson) obj;
+        return this.firstName.equals(p.firstName)
+                && this.lastName.equals(p.lastName);
+    }
 }

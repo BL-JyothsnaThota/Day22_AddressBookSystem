@@ -6,9 +6,7 @@ public class AddressBook {
 
     ArrayList<ContactPerson> personList = new ArrayList<>();
 
-    public void addContact(ContactPerson person) {
-        personList.add(person);
-    }
+    
 
     public void displayAll() {
         for (ContactPerson p : personList) {
@@ -25,5 +23,15 @@ public class AddressBook {
     }
     public void deleteContact(String firstName) {
         personList.removeIf(p -> p.firstName.equals(firstName));
+    }
+    public void addContact(ContactPerson person) {
+
+        for (ContactPerson p : personList) {
+            if (p.equals(person)) {
+                System.out.println("Duplicate Entry!");
+                return;
+            }
+        }
+        personList.add(person);
     }
 }
