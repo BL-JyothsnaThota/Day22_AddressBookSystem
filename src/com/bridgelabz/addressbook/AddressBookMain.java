@@ -14,5 +14,6 @@ public class AddressBookMain {
         );
 
         addressBook.addContact(person);
+        addressBook.editContact("John", "Bangalore");
     }
 }
