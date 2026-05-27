@@ -1,29 +1,29 @@
 package com.bridgelabz.addressbook;
 
+import java.util.ArrayList;
+
 public class AddressBook {
 
-    ContactPerson person;
+    ArrayList<ContactPerson> personList = new ArrayList<>();
 
     public void addContact(ContactPerson person) {
-        this.person = person;
-        System.out.println("Contact Added:");
-        person.display();
+        personList.add(person);
+    }
+
+    public void displayAll() {
+        for (ContactPerson p : personList) {
+            p.display();
+        }
     }
     public void editContact(String firstName, String newCity) {
-        if (person != null && person.firstName.equals(firstName)) {
-            person.city = newCity;
-            System.out.println("Updated Contact:");
-            person.display();
-        } else {
-            System.out.println("Contact not found");
+        for (ContactPerson p : personList) {
+            if (p.firstName.equals(firstName)) {
+                p.city = newCity;
+                return;
+            }
         }
     }
     public void deleteContact(String firstName) {
-        if (person != null && person.firstName.equals(firstName)) {
-            person = null;
-            System.out.println("Contact deleted");
-        } else {
-            System.out.println("Contact not found");
-        }
+        personList.removeIf(p -> p.firstName.equals(firstName));
     }
 }
