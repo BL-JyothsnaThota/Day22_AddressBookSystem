@@ -1,19 +1,17 @@
 package com.bridgelabz.addressbook;
 
+import java.util.HashMap;
+
 public class AddressBookMain {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Address Book");
 
-        AddressBook addressBook = new AddressBook();
+        HashMap<String, AddressBook> addressBookMap = new HashMap<>();
 
-        ContactPerson person = new ContactPerson(
-                "John", "Doe", "Street 1",
-                "Chennai", "TN", "600001",
-                "9876543210", "john@gmail.com"
-        );
+        AddressBook homeBook = new AddressBook();
+        addressBookMap.put("Home", homeBook);
 
-        addressBook.addContact(person);
-        addressBook.editContact("John", "Bangalore");
+        AddressBook officeBook = new AddressBook();
+        addressBookMap.put("Office", officeBook);
     }
 }
