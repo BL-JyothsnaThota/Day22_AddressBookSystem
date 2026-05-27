@@ -18,4 +18,12 @@ public class AddressBook {
             System.out.println("Contact not found");
         }
     }
+    public void deleteContact(String firstName) {
+        if (person != null && person.firstName.equals(firstName)) {
+            person = null;
+            System.out.println("Contact deleted");
+        } else {
+            System.out.println("Contact not found");
+        }
+    }
 }
