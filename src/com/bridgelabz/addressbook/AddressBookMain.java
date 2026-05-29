@@ -1,6 +1,8 @@
 package com.bridgelabz.addressbook;
 
 import java.util.HashMap;
+import java.util.*;
+
 
 public class AddressBookMain {
 
@@ -17,5 +19,13 @@ public class AddressBookMain {
                 .flatMap(book -> book.personList.stream())
                 .filter(p -> p.city.equals("Chennai"))
                 .forEach(ContactPerson::display);
+
+        Map<String, List<ContactPerson>> cityMap = new HashMap<>();
+
+        for (AddressBook book : addressBookMap.values()) {
+            for (ContactPerson p : book.personList) {
+                cityMap.computeIfAbsent(p.city, k -> new ArrayList<>()).add(p);
+            }
+        }
     }
 }
