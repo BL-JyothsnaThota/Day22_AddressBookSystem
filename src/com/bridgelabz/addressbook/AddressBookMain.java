@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook;
 
 import java.util.HashMap;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class AddressBookMain {
@@ -27,5 +28,11 @@ public class AddressBookMain {
                 cityMap.computeIfAbsent(p.city, k -> new ArrayList<>()).add(p);
             }
         }
+        Map<String, Long> countByCity =
+                addressBookMap.values().stream()
+                        .flatMap(book -> book.personList.stream())
+                        .collect(Collectors.groupingBy(p -> p.city, Collectors.counting()));
+
+        System.out.println(countByCity);
     }
 }
