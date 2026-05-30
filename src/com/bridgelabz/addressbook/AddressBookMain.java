@@ -46,5 +46,14 @@ public class AddressBookMain {
                 "Hyderabad", "TS", "500001", "7777777777", "bob@gmail.com"));
 
         book.sortByFullName();
+
+        System.out.println("Sort by City:");
+        book.sortByCity();
+
+        System.out.println("\nSort by State:");
+        book.sortByState();
+
+        System.out.println("\nSort by Zip:");
+        book.sortByZip();
     }
 }

@@ -56,4 +56,28 @@ public class AddressBook {
 
         sortedList.forEach(System.out::println);
     }
+    public void sortByCity() {
+
+        personList.stream()
+                .sorted(Comparator.comparing(p -> p.city))
+                .forEach(System.out::println);
+    }
+    public void sortByState() {
+
+        personList.stream()
+                .sorted(Comparator.comparing(p -> p.state))
+                .forEach(System.out::println);
+    }
+    public void sortByZip() {
+
+        personList.stream()
+                .sorted(Comparator.comparingInt(p -> Integer.parseInt(p.zip)))
+                .forEach(System.out::println);
+    }
+    public void sortContacts(Comparator<ContactPerson> comparator) {
+
+        personList.stream()
+                .sorted(comparator)
+                .forEach(System.out::println);
+    }
 }
