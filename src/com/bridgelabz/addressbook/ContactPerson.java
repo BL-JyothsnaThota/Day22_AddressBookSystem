@@ -36,4 +36,14 @@ public class ContactPerson {
         return this.firstName.equals(p.firstName)
                 && this.lastName.equals(p.lastName);
     }
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " | "
+                + address + " | "
+                + city + " | "
+                + state + " | "
+                + zip + " | "
+                + phoneNumber + " | "
+                + email;
+    }
 }

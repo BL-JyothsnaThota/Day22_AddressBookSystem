@@ -34,5 +34,17 @@ public class AddressBookMain {
                         .collect(Collectors.groupingBy(p -> p.city, Collectors.counting()));
 
         System.out.println(countByCity);
+        AddressBook book = new AddressBook();
+
+        book.addContact(new ContactPerson("John", "Doe", "Street1",
+                "Chennai", "TN", "600001", "9999999999", "john@gmail.com"));
+
+        book.addContact(new ContactPerson("Alice", "Roy", "Street2",
+                "Bangalore", "KA", "560001", "8888888888", "alice@gmail.com"));
+
+        book.addContact(new ContactPerson("Bob", "Kumar", "Street3",
+                "Hyderabad", "TS", "500001", "7777777777", "bob@gmail.com"));
+
+        book.sortByFullName();
     }
 }

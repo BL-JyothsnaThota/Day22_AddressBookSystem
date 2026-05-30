@@ -1,6 +1,9 @@
 package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 
@@ -33,5 +36,24 @@ public class AddressBook {
             }
         }
         personList.add(person);
+    }
+    public void sortByName() {
+
+        List<ContactPerson> sortedList = personList.stream()
+                .sorted(Comparator.comparing(p -> p.firstName))
+                .collect(Collectors.toList());
+
+        System.out.println("Sorted Contacts:");
+        sortedList.forEach(System.out::println);
+    }
+    public void sortByFullName() {
+
+        List<ContactPerson> sortedList = personList.stream()
+                .sorted(Comparator
+                        .comparing((ContactPerson p) -> p.firstName)
+                        .thenComparing(p -> p.lastName))
+                .collect(Collectors.toList());
+
+        sortedList.forEach(System.out::println);
     }
 }
