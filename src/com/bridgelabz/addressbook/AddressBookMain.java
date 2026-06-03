@@ -9,6 +9,18 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
 
+
+
+
+
+
+
+
+
+
+
+
+
         AddressBook book = new AddressBook();
 
         book.addContact(new ContactPerson("John", "Doe", "Street1",

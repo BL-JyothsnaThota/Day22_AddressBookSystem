@@ -8,8 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-
+import com.opencsv.CSVWriter;
+import com.opencsv.CSVReader;
 
 public class AddressBook {
 
@@ -133,6 +133,55 @@ public class AddressBook {
 
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
+        }
+    }
+    public void writeToCSV(String filePath) {
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
+
+            for (ContactPerson p : personList) {
+
+                String[] data = {
+                        p.firstName,
+                        p.lastName,
+                        p.address,
+                        p.city,
+                        p.state,
+                        p.zip,
+                        p.phoneNumber,
+                        p.email
+                };
+
+                writer.writeNext(data);
+            }
+
+            System.out.println("Data written to CSV successfully!");
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    public void readFromCSV(String filePath) {
+
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+
+            List<String[]> allData = reader.readAll();
+
+            for (String[] data : allData) {
+
+                ContactPerson person = new ContactPerson(
+                        data[0], data[1], data[2],
+                        data[3], data[4], data[5],
+                        data[6], data[7]
+                );
+
+                personList.add(person);
+            }
+
+            System.out.println("Data read from CSV successfully!");
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
