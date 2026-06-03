@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 public class AddressBook {
 
@@ -79,5 +85,54 @@ public class AddressBook {
         personList.stream()
                 .sorted(comparator)
                 .forEach(System.out::println);
+    }
+    public void readFromFile(String filePath) {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                ContactPerson person = new ContactPerson(
+                        data[0], data[1], data[2],
+                        data[3], data[4], data[5],
+                        data[6], data[7]
+                );
+
+                personList.add(person);
+            }
+
+            System.out.println("Contacts loaded from file!");
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+    }
+
+    public void writeToFile(String filePath) {
+
+        try (FileWriter writer = new FileWriter(filePath)) {
+
+            for (ContactPerson p : personList) {
+                writer.write(
+                        p.firstName + "," +
+                                p.lastName + "," +
+                                p.address + "," +
+                                p.city + "," +
+                                p.state + "," +
+                                p.zip + "," +
+                                p.phoneNumber + "," +
+                                p.email + "\n"
+                );
+            }
+
+            System.out.println("Contacts saved to file successfully!");
+
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
     }
 }

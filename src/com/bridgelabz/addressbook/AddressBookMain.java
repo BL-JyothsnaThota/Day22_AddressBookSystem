@@ -9,31 +9,6 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
 
-        HashMap<String, AddressBook> addressBookMap = new HashMap<>();
-
-        AddressBook homeBook = new AddressBook();
-        addressBookMap.put("Home", homeBook);
-
-        AddressBook officeBook = new AddressBook();
-        addressBookMap.put("Office", officeBook);
-        addressBookMap.values().stream()
-                .flatMap(book -> book.personList.stream())
-                .filter(p -> p.city.equals("Chennai"))
-                .forEach(ContactPerson::display);
-
-        Map<String, List<ContactPerson>> cityMap = new HashMap<>();
-
-        for (AddressBook book : addressBookMap.values()) {
-            for (ContactPerson p : book.personList) {
-                cityMap.computeIfAbsent(p.city, k -> new ArrayList<>()).add(p);
-            }
-        }
-        Map<String, Long> countByCity =
-                addressBookMap.values().stream()
-                        .flatMap(book -> book.personList.stream())
-                        .collect(Collectors.groupingBy(p -> p.city, Collectors.counting()));
-
-        System.out.println(countByCity);
         AddressBook book = new AddressBook();
 
         book.addContact(new ContactPerson("John", "Doe", "Street1",
@@ -42,18 +17,16 @@ public class AddressBookMain {
         book.addContact(new ContactPerson("Alice", "Roy", "Street2",
                 "Bangalore", "KA", "560001", "8888888888", "alice@gmail.com"));
 
-        book.addContact(new ContactPerson("Bob", "Kumar", "Street3",
-                "Hyderabad", "TS", "500001", "7777777777", "bob@gmail.com"));
+// Write to file
+        book.writeToFile("contacts.txt");
 
-        book.sortByFullName();
+// Clear list (to test reading)
+        book.personList.clear();
 
-        System.out.println("Sort by City:");
-        book.sortByCity();
+// Read from file
+        book.readFromFile("contacts.txt");
 
-        System.out.println("\nSort by State:");
-        book.sortByState();
-
-        System.out.println("\nSort by Zip:");
-        book.sortByZip();
+// Display
+        book.displayAll();
     }
 }
