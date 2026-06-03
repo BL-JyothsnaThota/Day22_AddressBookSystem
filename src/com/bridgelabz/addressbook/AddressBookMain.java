@@ -8,37 +8,26 @@ import java.util.stream.Collectors;
 public class AddressBookMain {
 
     public static void main(String[] args) {
+        AddressBook app = new AddressBook();
 
+        List<ContactPerson> list = new ArrayList<>();
 
+        list.add(new ContactPerson("John", "Doe", "Street1",
+                "Chennai", "TN", "600001", "9876543210", "john@gmail.com"));
 
+        list.add(new ContactPerson("Jane", "Smith", "Street2",
+                "Bangalore", "KA", "560001", "9123456780", "jane@gmail.com"));
 
+        // Write JSON
+        app.writeToJson("addressbook.json", list);
 
+        // Read JSON
+        List<ContactPerson> newList = app.readFromJson("addressbook.json");
 
+        // Print
+        for (ContactPerson p : newList) {
+            System.out.println(p.firstName + " - " + p.city);
+        }
 
-
-
-
-
-
-
-        AddressBook book = new AddressBook();
-
-        book.addContact(new ContactPerson("John", "Doe", "Street1",
-                "Chennai", "TN", "600001", "9999999999", "john@gmail.com"));
-
-        book.addContact(new ContactPerson("Alice", "Roy", "Street2",
-                "Bangalore", "KA", "560001", "8888888888", "alice@gmail.com"));
-
-// Write to file
-        book.writeToFile("contacts.txt");
-
-// Clear list (to test reading)
-        book.personList.clear();
-
-// Read from file
-        book.readFromFile("contacts.txt");
-
-// Display
-        book.displayAll();
     }
 }

@@ -10,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVReader;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 public class AddressBook {
 
@@ -183,5 +186,31 @@ public class AddressBook {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+    public void writeToJson(String filePath, List<ContactPerson> personList) {
+        Gson gson = new Gson();
+
+        try (FileWriter writer = new FileWriter(filePath)) {
+            gson.toJson(personList, writer);
+            System.out.println("Data written to JSON successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public List<ContactPerson> readFromJson(String filePath) {
+        Gson gson = new Gson();
+
+        try (FileReader reader = new FileReader(filePath)) {
+
+            Type listType = new TypeToken<List<ContactPerson>>() {}.getType();
+
+            List<ContactPerson> personList = gson.fromJson(reader, listType);
+
+            return personList;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
